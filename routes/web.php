@@ -32,12 +32,14 @@ Route::middleware('auth')->group(function () {
 
     /*
     |--------------------------------------------------------------------------
-    | Customer Cart
+    | Customer Cart / Checkout
     |--------------------------------------------------------------------------
     */
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
     Route::delete('/cart/{product_id}', [CartController::class, 'destroy'])->name('cart.destroy');
+
+    Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 });
 
 require __DIR__.'/auth.php';

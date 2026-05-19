@@ -12,6 +12,18 @@
             <p class="text-muted">Review your selected gadgets before checkout.</p>
         </div>
 
+        @if (session('success'))
+            <div class="alert alert-success rounded-3">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="alert alert-danger rounded-3">
+                {{ session('error') }}
+            </div>
+        @endif
+
         @auth
             @php
                 $total = 0;
@@ -67,9 +79,12 @@
                                 <span class="fw-bold text-primary fs-5">₱{{ number_format($total, 2) }}</span>
                             </div>
 
-                            <a href="#" class="btn btn-warning w-100 fw-semibold rounded-3 mb-2">
-                                Proceed to Checkout
-                            </a>
+                            <form action="{{ route('cart.checkout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-warning w-100 fw-semibold rounded-3 mb-2">
+                                    Proceed to Checkout
+                                </button>
+                            </form>
 
                             <a href="{{ route('products.index') }}" class="btn btn-outline-secondary w-100 rounded-3">
                                 Continue Shopping
