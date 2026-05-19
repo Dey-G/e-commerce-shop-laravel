@@ -13,15 +13,11 @@
         </div>
 
         @if (session('success'))
-            <div class="alert alert-success rounded-3">
-                {{ session('success') }}
-            </div>
+            <div class="alert alert-success rounded-3">{{ session('success') }}</div>
         @endif
 
         @if (session('error'))
-            <div class="alert alert-danger rounded-3">
-                {{ session('error') }}
-            </div>
+            <div class="alert alert-danger rounded-3">{{ session('error') }}</div>
         @endif
 
         @auth
@@ -34,7 +30,6 @@
 
             @if ($cartItems->count() > 0)
                 <div class="row g-4">
-
                     <div class="col-lg-8">
                         <div class="bg-white rounded-4 shadow-sm p-4">
                             <div class="table-responsive">
@@ -47,7 +42,6 @@
                                             <th>Total</th>
                                         </tr>
                                     </thead>
-
                                     <tbody>
                                         @foreach ($cartItems as $item)
                                             <x-cart-items :item="$item" />
@@ -79,19 +73,15 @@
                                 <span class="fw-bold text-primary fs-5">₱{{ number_format($total, 2) }}</span>
                             </div>
 
-                            <form action="{{ route('cart.checkout') }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-warning w-100 fw-semibold rounded-3 mb-2">
-                                    Proceed to Checkout
-                                </button>
-                            </form>
+                            <a href="{{ route('checkout.create') }}" class="btn btn-warning w-100 fw-semibold rounded-3 mb-2">
+                                Proceed to Checkout
+                            </a>
 
                             <a href="{{ route('products.index') }}" class="btn btn-outline-secondary w-100 rounded-3">
                                 Continue Shopping
                             </a>
                         </div>
                     </div>
-
                 </div>
             @else
                 <div class="bg-white rounded-4 shadow-sm p-5 text-center">
@@ -106,9 +96,7 @@
             <div class="bg-white rounded-4 shadow-sm p-5 text-center">
                 <h3 class="fw-bold">Login required</h3>
                 <p class="text-muted">Please login to view your cart.</p>
-                <a href="{{ route('login') }}" class="btn btn-warning fw-semibold px-4">
-                    Login
-                </a>
+                <a href="{{ route('login') }}" class="btn btn-warning fw-semibold px-4">Login</a>
             </div>
         @endauth
 
